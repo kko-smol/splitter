@@ -1,0 +1,12 @@
+bin
+build
+CMakeFiles
+*.cmake
+_deps
+lib
+*.a
+.vscode
+Testing
+Makefile
+Tests
+CMakeCache.txt
