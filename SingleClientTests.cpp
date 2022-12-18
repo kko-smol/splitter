@@ -65,12 +65,17 @@ TEST(FifoTestDrop, SingleClient) {
     ClientID client1;
     EXPECT_TRUE(s.ClientAdd(&client1));
 
-   
     std::vector<FrameBuffer> fbs;
 
     for (int i = 0; i < num_bufs; ++i) {
         FrameBuffer fb = std::make_shared<std::vector<uint8_t>>(100);
         auto res = s.Put(fb, 1000);
+        if (i < 2) {
+            EXPECT_EQ(res, ISplitterError::NO_ERROR);
+        } else {
+            EXPECT_EQ(res, ISplitterError::TIMEOUT);
+        }
+
         fbs.push_back(fb);
     }
 

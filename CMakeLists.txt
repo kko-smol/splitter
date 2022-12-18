@@ -6,6 +6,8 @@ find_package(PkgConfig)
 
 add_compile_options(-std=c++17)
 
+add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 

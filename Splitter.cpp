@@ -7,9 +7,11 @@
 
 struct ClientCtx {
     ClientCtx(size_t max_buffers):
-      max_buffers_(max_buffers),
+      to_delete_(false),
       drop_counter_(0),
-      to_delete_(false) {}
+      max_buffers_(max_buffers) {
+
+    }
     
     void PrepareDelete() {
         to_delete_ = true;
@@ -65,7 +67,9 @@ private:
 };
 
 ISplitter::ISplitter(size_t max_buffers, size_t max_clients):
-  max_buffers_(max_buffers), max_clients_(max_clients), state_(ISplitterError::NO_ERROR) {
+  state_(ISplitterError::NO_ERROR),
+  max_buffers_(max_buffers),
+  max_clients_(max_clients) {
 }
 
 bool ISplitter::InfoGet(size_t* _pzMaxBuffers, size_t* _pzMaxClients) const {
